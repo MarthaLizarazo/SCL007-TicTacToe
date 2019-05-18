@@ -20,7 +20,56 @@ export default class App extends React.Component {
     this.setState({ gameState: [[0, 0, 0], [0, 0, 0], [0, 0, 0]] });
   };
 
+  // Capturar al Ganador
+  getWinner = () => {
+    const NUM_TILES = 3;
+    let matriz = this.state.gameState;
+    let suma;
+
+    // comprobando Fila ganadora
+    for (let i = 0; i < NUM_TILES; i++) {
+      suma = matriz[i][0] + matriz[i][1] + matriz[i][2];
+      if (suma == 3) {
+        return 1;
+      } else if ((suma = -3)) {
+        return -1;
+      }
+    }
+
+    // comprobando columna ganadora
+    for (let i = 0; i < NUM_TILES; i++) {
+      suma = matriz[0][i] + matriz[1][i] + matriz[2][i];
+      if (suma == 3) {
+        return 1;
+      } else if ((suma = -3)) {
+        return -1;
+      }
+    }
+
+    // comprobando diagonal ganadora
+    suma = matriz[0][0] + matriz[1][1] + matriz[2][2];
+    if (suma == 3) {
+      return 1;
+    } else if ((suma = -3)) {
+      return -1;
+    }
+
+    suma = matriz[2][0] + matriz[1][1] + matriz[0][2];
+    if (suma == 3) {
+      return 1;
+    } else if ((suma = -3)) {
+      return -1;
+    }
+  };
+
   onTilePress = (row, col) => {
+    // No permite reescribir una ficha ya marcada
+    let value = this.state.gameState[row][col];
+    if (value !== 0) {
+      return;
+    }
+
+    // captura jugador actual
     let currentPlayer = this.state.currentPlayer;
 
     // establecer posición de la ficha
