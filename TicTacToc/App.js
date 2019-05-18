@@ -20,7 +20,18 @@ export default class App extends React.Component {
     this.setState({ gameState: [[0, 0, 0], [0, 0, 0], [0, 0, 0]] });
   };
 
-  onTilePress = (row, col) => {};
+  onTilePress = (row, col) => {
+    let currentPlayer = this.state.currentPlayer;
+
+    // establecer posición de la ficha
+    let matriz = this.state.gameState.slice(); // devuelve una copia nueva
+    matriz[row][col] = currentPlayer;
+    this.setState({ gameState: matriz });
+
+    // Siguiente jugador
+    let nextPlayer = currentPlayer == 1 ? -1 : 1;
+    this.setState({ currentPlayer: nextPlayer });
+  };
 
   renderIcon = (row, col) => {
     var value = this.state.gameState[row][col];
