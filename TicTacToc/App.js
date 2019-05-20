@@ -101,10 +101,10 @@ export default class App extends React.Component {
     // Comprobar al Ganador
     var winner = this.getWinner();
     if (winner == 1) {
-      Alert.alert('Jugador 1 es el Ganador');
+      Alert.alert('Jugador LUNA es el Ganador');
       this.initializeGame();
     } else if (winner == -1) {
-      Alert.alert('Jugador 2 es el Ganador');
+      Alert.alert('Jugador ESTRELLA es el Ganador');
       this.initializeGame();
     }
   };
@@ -117,9 +117,16 @@ export default class App extends React.Component {
     var value = this.state.gameState[row][col];
     switch (value) {
       case 1:
-        return <Icon name="close" style={styles.tileX} />;
+        return (
+          <Image source={require('./src/img/luna.png')} style={styles.tileX} />
+        );
       case -1:
-        return <Icon name="circle-outline" style={styles.tileO} />;
+        return (
+          <Image
+            source={require('./src/img/estrella.png')}
+            style={styles.tileO}
+          />
+        );
       default:
         return <View />;
     }
@@ -242,13 +249,15 @@ const styles = StyleSheet.create({
   },
 
   tileX: {
-    color: 'red',
-    fontSize: 60
+    flex: 1,
+    width: 80,
+    height: 50
   },
 
   tileO: {
-    color: 'green',
-    fontSize: 60
+    flex: 1,
+    width: 80,
+    height: 50
   },
 
   buton: {
