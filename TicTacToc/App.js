@@ -2,6 +2,8 @@ import React from 'react';
 import {
   StyleSheet,
   Text,
+  Image,
+  ImageBackground,
   View,
   TouchableOpacity,
   Alert,
@@ -125,7 +127,12 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ImageBackground
+        source={require('./src/img/fondo.jpg')}
+        style={styles.container}
+      >
+        <Text style={styles.textStyle}>Tic-Tac-Toe</Text>
+
         <View
           style={{
             flexDirection: 'row',
@@ -194,9 +201,13 @@ export default class App extends React.Component {
             {this.renderIcon(2, 2)}
           </TouchableOpacity>
         </View>
-        <View style={{ paddingTop: 50 }} />
-        <Button title="Nuevo Juego" onPress={this.onNewGamePress} />
-      </View>
+        <View style={styles.buton} />
+        <Button
+          color="#00ced1"
+          title="Nuevo Juego"
+          onPress={this.onNewGamePress}
+        />
+      </ImageBackground> //
     );
   }
 }
@@ -204,13 +215,26 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center'
   },
 
+  textStyle: {
+    fontSize: 30,
+    paddingBottom: 50,
+    fontFamily: 'serif',
+    color: '#00ced1'
+  },
+
+  imgStyle: {
+    width: 100,
+    height: 100,
+    marginTop: 30
+  },
+
   tile: {
-    borderWidth: 8,
+    borderWidth: 7,
+    borderColor: '#f5fffa',
     width: 100,
     height: 100,
     alignItems: 'center',
@@ -225,5 +249,9 @@ const styles = StyleSheet.create({
   tileO: {
     color: 'green',
     fontSize: 60
+  },
+
+  buton: {
+    paddingTop: 50
   }
 });
